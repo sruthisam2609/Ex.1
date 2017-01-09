@@ -1,34 +1,44 @@
-package com.example.font;
+package com.example.sample;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-	}
+public class MainActivity extends ActionBarActivity
+{
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	Button bt;
+    TextView txt;
+    EditText ed1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        bt=(Button) findViewById(R.id.hello);
+        txt=(TextView)findViewById(R.id.tv);
+        ed1=(EditText)findViewById(R.id.editT);
+        bt.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				String data=ed1.getText().toString();
+				//Toast msg=Toast.makeText(getApplicationContext(), data,Toast.LENGTH_LONG);
+				// TODO Auto-generated method stub
+				txt.setText("Hello"+data);
+				Intent i=new Intent(MainActivity.this,SecondActivity.class);
+				i.putExtra("username", data);
+				startActivity(i);
+			}
+		});
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+   
 }
